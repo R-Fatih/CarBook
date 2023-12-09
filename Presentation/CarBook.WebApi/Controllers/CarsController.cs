@@ -16,16 +16,18 @@ namespace CarBook.WebApi.Controllers
 		private readonly UpdateCarCommandHandler _updateCarCommandHandler;
 		private readonly RemoveCarCommandHandler _removeCarCommandHandler;
 		private	readonly GetCarWithQueryHandler _getCarWithQueryHandler;
-		public CarsController(CreateCarCommandHandler createCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithQueryHandler getCarWithQueryHandler)
-		{
-			_createCommandHandler = createCommandHandler;
-			_getCarByIdQueryHandler = getCarByIdQueryHandler;
-			_getCarQueryHandler = getCarQueryHandler;
-			_updateCarCommandHandler = updateCarCommandHandler;
-			_removeCarCommandHandler = removeCarCommandHandler;
-			_getCarWithQueryHandler = getCarWithQueryHandler;
-		}
-		[HttpGet]
+		private	readonly GetLast5CarsWithBrandQueryHandler _getLast5CarsWithBrandQueryHandler;
+        public CarsController(CreateCarCommandHandler createCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithQueryHandler getCarWithQueryHandler, GetLast5CarsWithBrandQueryHandler getLast5CarsWithBrandQueryHandler)
+        {
+            _createCommandHandler = createCommandHandler;
+            _getCarByIdQueryHandler = getCarByIdQueryHandler;
+            _getCarQueryHandler = getCarQueryHandler;
+            _updateCarCommandHandler = updateCarCommandHandler;
+            _removeCarCommandHandler = removeCarCommandHandler;
+            _getCarWithQueryHandler = getCarWithQueryHandler;
+            _getLast5CarsWithBrandQueryHandler = getLast5CarsWithBrandQueryHandler;
+        }
+        [HttpGet]
 		public async Task<IActionResult> CarList()
 		{
 			return Ok(await _getCarQueryHandler.Handle());
@@ -44,7 +46,14 @@ namespace CarBook.WebApi.Controllers
 			return Ok(value);
 
 		}
-		[HttpPost]
+        [HttpGet("GetLast5CarsWithBrands")]
+        public IActionResult GetLast5CarsWithBrands()
+        {
+            var value = _getLast5CarsWithBrandQueryHandler.Handle();
+            return Ok(value);
+
+        }
+        [HttpPost]
 		public async Task<IActionResult> CreateCar(CreateCarCommand command)
 		{
 			await _createCommandHandler.Handle(command);
