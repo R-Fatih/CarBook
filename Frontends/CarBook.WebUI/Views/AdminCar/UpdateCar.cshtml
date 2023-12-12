@@ -1,0 +1,92 @@
+﻿@using CarBook.Dtos.CarDtos
+@model UpdateCarDto
+@{
+	ViewData["Title"] = "UpdateCar";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="page-content">
+	<div class="container-fluid">
+
+		<!-- start page title -->
+		<div class="row">
+			<div class="col-xl-12">
+
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Araç güncelleme</h4>
+						<p class="card-subtitle mb-4">Araç ile ilgili temel bilgileri eksiksiz doldurunuz.</p>
+
+						<form method="post">
+							<input type="hidden" asp-for="CarId" />
+							<div class="form-group">
+								<label for="exampleInputBrand">Marka</label>
+								@Html.DropDownListFor(x => x.BrandId, (List<SelectListItem>)ViewBag.Brands, new { @class = "form-control" })
+
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Model</label>
+								<input asp-for=Model type="text" class="form-control" id="exampleInputModel" placeholder="Modeli girin">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Resim</label>
+								<input asp-for=CoverImageUrl type="text" class="form-control" id="exampleInputModel" placeholder="Resim">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">KM</label>
+								<input asp-for=Km type="text" class="form-control" id="exampleInputModel" placeholder="KM girin">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Vites</label>
+								@Html.DropDownListFor(x => x.Transmission, (List<SelectListItem>)new List<SelectListItem>{
+								new SelectListItem{
+								Value="Manuel",
+								Text="Manuel"
+								},new SelectListItem{
+								Value="Otomatik",
+								Text="Otomatik"
+								},new SelectListItem{
+								Value="Yarı otomatik",
+								Text="Yarı otomatik"
+								},
+								}, new { @class = "form-control" })
+
+								@* 								<input asp-for=Transmission type="text" class="form-control" id="exampleInputModel" placeholder="Vites girin">
+								*@
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Koltuk</label>
+								<input asp-for=Seat type="number" class="form-control" id="exampleInputModel" placeholder="Koltuk sayısı girin">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Bagaj</label>
+								<input asp-for=Luggage type="number" class="form-control" id="exampleInputModel" placeholder="Bagaj türü girin">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Yakıt türü</label>
+								@Html.DropDownListFor(x => x.Fuel, (List<SelectListItem>)new List<SelectListItem>{
+								new SelectListItem{
+								Value="Benzinli",
+								Text="Benzinli"
+								},new SelectListItem{
+								Value="Dizel",
+								Text="Dizel"
+								},new SelectListItem{
+								Value="Hibrit",
+								Text="Hibrit"
+								},
+								}, new { @class = "form-control" })
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Büyük fotoğraf</label>
+								<input asp-for=BigImageUrl type="text" class="form-control" id="exampleInputModel" placeholder="Büyük fotoğraf resmi girin">
+							</div>
+							<button type="submit" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div> 
