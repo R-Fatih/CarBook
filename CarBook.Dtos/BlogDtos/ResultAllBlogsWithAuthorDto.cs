@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Application.Features.Mediator.Results.BlogResults
+namespace CarBook.Dtos.BlogDtos
 {
-    public class GetBlogByIdQueryResult
+    public class ResultAllBlogsWithAuthorDto
     {
         public int BlogId { get; set; }
         public string Title { get; set; }
+        public string AuthorName { get; set; }
+        public string CategoryName { get; set; }
         public int AuthorId { get; set; }
         public string CoverImageUrl { get; set; }
         public DateTime CreatedDate { get; set; }
