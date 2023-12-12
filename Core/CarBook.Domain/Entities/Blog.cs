@@ -20,5 +20,6 @@ namespace CarBook.Domain.Entities
 
         public Author Author { get; set; }
         public Category Category { get; set; }
+        public List<TagCloud> TagClouds { get; set; }
     }
 }
