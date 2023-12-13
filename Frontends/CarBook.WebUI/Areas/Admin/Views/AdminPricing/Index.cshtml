@@ -1,0 +1,62 @@
+﻿@using CarBook.Dtos.PricingDtos
+@model List<ResultPricingDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 1;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ödeme listesi</h4>
+                        <p class="card-subtitle mb-4">
+                            Ödeme ekleme, silme, güncellemei arama ve listeleme gibi işlemleri bu sayfa üzerinden gerçekletirebilirsiniz.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>İsim</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>@item.Name</td>
+                                            <td><a href="/Admin/AdminPricing/RemovePricing/@item.PricingId" class="btn btn-outline-danger">Sil</a></td>
+                                            <td><a href="/Admin/AdminPricing/UpdatePricing/@item.PricingId" class="btn btn-outline-success">Güncelle</a></td>
+
+                                        </tr>
+                                        count++;
+                                    }
+                                </tbody>
+                            </table>
+                           <a href="/Admin/AdminPricing/CreatePricing/" class="btn btn-outline-primary">Yeni ödeme ekle</a>
+                        </div>
+
+                    </div>
+                    <!-- end card-body-->
+                </div>
+                <!-- end card -->
+
+            </div>
+            <!-- end col -->
+            <!-- end col -->
+        </div>
+        <!-- end page title -->
+
+    </div> <!-- container-fluid -->
+</div>

@@ -21,7 +21,13 @@ namespace CarBook.WebApi.Controllers
             var values=_repository.GetAll();
             return Ok(values);
         }
-        [HttpPost]
+		[HttpGet("GetCommentsByBlogId")]
+		public IActionResult GetCommentsByBlogId(int id)
+		{
+			var values = _repository.GetCommentsByBlogId(id);
+			return Ok(values);
+		}
+		[HttpPost]
         public IActionResult CreateComment(Comment comment)
         {
             _repository.Create(comment);
