@@ -1,0 +1,44 @@
+﻿@using CarBook.Dtos.AboutDtos
+@model CreateAboutDto
+@{
+	ViewData["Title"] = "CreateAbout";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="page-content">
+	<div class="container-fluid">
+
+		<!-- start page title -->
+		<div class="row">
+			<div class="col-xl-12">
+
+				<div class="card">
+					<div class="card-body">
+
+						<h4 class="card-title">Yeni Hakkımda girişi</h4>
+						<p class="card-subtitle mb-4">Hakkımda ile ilgili temel bilgileri eksiksiz doldurunuz.</p>
+
+						<form method="post">
+							
+							<div class="form-group">
+								<label for="exampleInputModel">Başlık</label>
+								<input asp-for=title type="text" class="form-control" id="exampleInputModel" placeholder="Başlık">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Açıklama</label>
+								<input asp-for=description type="text" class="form-control" id="exampleInputModel" placeholder="Açıklama">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">Resim url</label>
+								<input asp-for=imageUrl type="text" class="form-control" id="exampleInputModel" placeholder="Resim url">
+							</div>
+							
+							<button type="submit" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div> 

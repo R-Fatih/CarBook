@@ -1,0 +1,66 @@
+﻿@using CarBook.Dtos.AboutDtos
+@model List<ResultAboutDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 1;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Hakkımda listesi</h4>
+                        <p class="card-subtitle mb-4">
+                            Hakkımda ekleme, silme, güncellemei arama ve listeleme gibi işlemleri bu sayfa üzerinden gerçekletirebilirsiniz.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Başlık</th>
+                                        <th>Açıklama</th>
+                                        <th>Url</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>@item.title</td>
+                                            <td>@item.description</td>
+                                            <td>@item.imageUrl</td>
+                                            <td><a href="/Admin/AdminAbout/RemoveAbout/@item.aboutId" class="btn btn-outline-danger">Sil</a></td>
+                                            <td><a href="/Admin/AdminAbout/UpdateAbout/@item.aboutId" class="btn btn-outline-success">Güncelle</a></td>
+
+                                        </tr>
+                                        count++;
+                                    }
+                                </tbody>
+                            </table>
+                           <a href="/Admin/AdminAbout/CreateAbout/" class="btn btn-outline-primary">Yeni Hakkımda ekle</a>
+                        </div>
+
+                    </div>
+                    <!-- end card-body-->
+                </div>
+                <!-- end card -->
+
+            </div>
+            <!-- end col -->
+            <!-- end col -->
+        </div>
+        <!-- end page title -->
+
+    </div> <!-- container-fluid -->
+</div>

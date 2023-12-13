@@ -1,0 +1,36 @@
+﻿@using CarBook.Dtos.CategoryDtos
+@model CreateCategoryDto
+@{
+	ViewData["Title"] = "CreateCategory";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="page-content">
+	<div class="container-fluid">
+
+		<!-- start page title -->
+		<div class="row">
+			<div class="col-xl-12">
+
+				<div class="card">
+					<div class="card-body">
+
+						<h4 class="card-title">Yeni kategori girişi</h4>
+						<p class="card-subtitle mb-4">Kategori ile ilgili temel bilgileri eksiksiz doldurunuz.</p>
+
+						<form method="post">
+							<div class="form-group">
+								<label for="exampleInputModel">İsim</label>
+								<input asp-for=Name type="text" class="form-control" id="exampleInputModel" placeholder="Başlık">
+							</div>
+					
+							
+							<button type="submit" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div> 
