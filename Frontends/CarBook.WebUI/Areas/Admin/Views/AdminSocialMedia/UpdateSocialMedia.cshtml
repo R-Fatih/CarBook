@@ -1,0 +1,44 @@
+﻿@using CarBook.Dtos.SocialMediaDtos
+@model UpdateSocialMediaDto
+@{
+	ViewData["Title"] = "UpdateSocialMedia";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="page-content">
+	<div class="container-fluid">
+
+		<!-- start page title -->
+		<div class="row">
+			<div class="col-xl-12">
+
+				<div class="card">
+					<div class="card-body">
+
+						<h4 class="card-title">Sosyal medya güncelleme</h4>
+						<p class="card-subtitle mb-4">Sosyal medya ile ilgili temel bilgileri eksiksiz doldurunuz.</p>
+
+						<form method="post">
+							<input type="hidden" asp-for="SocialMediaId" />
+							<div class="form-group">
+								<label for="exampleInputModel">Başlık</label>
+								<input asp-for=Name type="text" class="form-control" id="exampleInputModel" placeholder="Başlık">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputModel">İkon</label>
+								<input asp-for=Icon type="text" class="form-control" id="exampleInputModel" placeholder="İkon">
+							</div>	<div class="form-group">
+								<label for="exampleInputModel">Url</label>
+								<input asp-for=Url type="text" class="form-control" id="exampleInputModel" placeholder="Url">
+							</div>
+						
+
+							<button type="submit" class="btn btn-primary waves-effect waves-light">Kaydet</button>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div> 
