@@ -1,0 +1,68 @@
+﻿@using CarBook.Dtos.FooterAddressDtos
+@model List<ResultFooterAddressDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 1;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Footer adres listesi</h4>
+                        <p class="card-subtitle mb-4">
+                            Footer adres ekleme, silme, güncellemei arama ve listeleme gibi işlemleri bu sayfa üzerinden gerçekletirebilirsiniz.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Adres</th>
+                                        <th>Açıklama</th>
+                                        <th>Email</th>
+                                        <th>Telefon</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>@item.Address</td>
+                                            <td>@item.Description</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Phone</td>
+                                            <td><a href="/Admin/AdminFooterAddress/RemoveFooterAddress/@item.FooterAddressId" class="btn btn-outline-danger">Sil</a></td>
+                                            <td><a href="/Admin/AdminFooterAddress/UpdateFooterAddress/@item.FooterAddressId" class="btn btn-outline-success">Güncelle</a></td>
+
+                                        </tr>
+                                        count++;
+                                    }
+                                </tbody>
+                            </table>
+                           <a href="/Admin/AdminFooterAddress/CreateFooterAddress/" class="btn btn-outline-primary">Yeni footer adresi ekle</a>
+                        </div>
+
+                    </div>
+                    <!-- end card-body-->
+                </div>
+                <!-- end card -->
+
+            </div>
+            <!-- end col -->
+            <!-- end col -->
+        </div>
+        <!-- end page title -->
+
+    </div> <!-- container-fluid -->
+</div>
