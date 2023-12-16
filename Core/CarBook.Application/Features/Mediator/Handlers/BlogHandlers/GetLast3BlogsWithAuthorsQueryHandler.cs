@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Application.Features.Mediator.Handlers.BlogHandlers
+namespace CarBook.Application.Features.Mediator.Handlers.BlogHandlers
 {
     public class GetLast3BlogsWithAuthorsQueryHandler : IRequestHandler<GetLast3BlogsWithAuthorsQuery, List<GetLast3BlogsWithAuthorsQueryResult>>
     {

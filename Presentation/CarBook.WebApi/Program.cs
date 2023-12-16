@@ -9,6 +9,7 @@ using CarBook.Application.Interfaces;
 using CarBook.Application.Interfaces.BlogInterfaces;
 using CarBook.Application.Interfaces.CarInterfaces;
 using CarBook.Application.Interfaces.CarPricingInterfaces;
+using CarBook.Application.Interfaces.StatisticsInterfaces;
 using CarBook.Application.Interfaces.TagCloudInterfaces;
 using CarBook.Application.Services;
 using CarBook.Domain.Entities;
@@ -18,10 +19,22 @@ using CarBook.Persistance.Repositories.BlogRepositories;
 using CarBook.Persistance.Repositories.CarPricingRepositories;
 using CarBook.Persistance.Repositories.CarRepositories;
 using CarBook.Persistance.Repositories.CommentRepositories;
+using CarBook.Persistance.Repositories.StatisticsRepositories;
 using CarBook.Persistance.Repositories.TagCloudRepositories;
+using CarBook.WebApi.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed((host) => true)
+        .AllowCredentials();
+    });
+});
+builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddScoped<CarBookContext>();
 builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
@@ -30,6 +43,7 @@ builder.Services.AddScoped(typeof(IBlogRepository),typeof(BlogRepository));
 builder.Services.AddScoped(typeof(ICarPricingRepository),typeof(CarPricingRepository));
 builder.Services.AddScoped(typeof(ITagCloudRepository),typeof(TagCloudRepository));
 builder.Services.AddScoped(typeof(IGenericRepository<Comment>),typeof(CommentRepository));
+builder.Services.AddScoped(typeof(IStatisticsRepository),typeof(StatisticsRepository));
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
@@ -85,11 +99,11 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
-
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<SignalRHub>("/signalrhub");
 app.Run();
