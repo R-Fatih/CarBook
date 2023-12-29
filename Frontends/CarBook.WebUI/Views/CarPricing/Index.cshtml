@@ -1,0 +1,83 @@
+﻿@using CarBook.Dtos.CarPricingDtos
+@model List<ResultCarPricingWithTimePeriod>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="car-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>&nbsp;</th>
+						        <th>&nbsp;</th>
+						        <th class="bg-primary heading">Günlük kiralama ücreti</th>
+						        <th class="bg-dark heading">Haftalık kiralama ücreti</th>
+								<th class="bg-black heading">Aylık kiralama ücreti</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+								@foreach (var item in Model)
+							{
+								
+						      <tr class="">
+						      	<td class="car-image"><div class="img" style="background-image:url(/carbook-master/images/car-1.jpg);"></div></td>
+						        <td class="product-name">
+						        	<h3>@item.Model</h3>
+						        	<p class="mb-0 rated">
+						        		<span>rated:</span>
+						        		<span class="ion-ios-star"></span>
+						        		<span class="ion-ios-star"></span>
+						        		<span class="ion-ios-star"></span>
+						        		<span class="ion-ios-star"></span>
+						        		<span class="ion-ios-star"></span>
+						        	</p>
+						        </td>
+						        
+						        <td class="price">
+						        	<p class="btn-custom"><a href="#">Aracı kiralayın</a></p>
+						        	<div class="price-rate">
+							        	<h3>
+												<span class="num">@item.DailyAmount<small class="currency">₺</small> </span>
+							        		<span class="per">/Günlük fiyat</span>
+							        	</h3>
+
+						        	</div>
+						        </td>
+						        
+						        <td class="price">
+						        	<p class="btn-custom"><a href="#">Aracı kiralayın</a></p>
+						        	<div class="price-rate">
+							        	<h3>
+												<span class="num">@item.WeeklyAmount<small class="currency">₺</small> </span>
+							        		<span class="per">/Haftalık fiyat</span>
+							        	</h3>
+
+						        </div>
+						        </td>
+
+						        <td class="price">
+						        	<p class="btn-custom"><a href="#">Aracı kiralayın</a></p>
+						        	<div class="price-rate">
+							        	<h3>
+												<span class="num"> @item.MonthlyAmount<small class="currency">₺</small> </span>
+							        		<span class="per">/Aylık fiyat</span>
+							        	</h3>
+
+							        </div>
+						        </td>
+						      </tr><!-- END TR-->
+							}
+			
+
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+			</div>
+		</section>
