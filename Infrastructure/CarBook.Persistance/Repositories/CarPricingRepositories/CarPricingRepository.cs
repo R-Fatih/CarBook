@@ -28,7 +28,7 @@ namespace CarBook.Persistance.Repositories.CarPricingRepositories
 
 		public List<GetCarPricingWithTimePeriodQueryResult> GetCarsPricingWithTimePeriod()
 		{
-           var values= _context.Database.SqlQueryRaw<GetCarPricingWithTimePeriodQueryResult>("select Model,[2] as 'DailyAmount',[3] as 'WeeklyAmount',[5] as 'MonthlyAmount' from\r\n(select Brands.Name+' '+Model as Model,Pricings.PricingId,Amount from CarPricings inner join Cars on Cars.CarId=CarPricings.CarId inner join Brands on Cars.BrandId=Brands.BrandId inner join Pricings on Pricings.PricingId=CarPricings.PricingId) as Source_table\r\nPivot(\r\nSum(Amount) For PricingId in ([2],[3],[5])\r\n) as Pivot_table").ToList();
+           var values= _context.Database.SqlQueryRaw<GetCarPricingWithTimePeriodQueryResult>("select Model,CoverImageUrl,[2] as 'DailyAmount',[3] as 'WeeklyAmount',[5] as 'MonthlyAmount' from\r\n(select Brands.Name+' '+Model as Model,Pricings.PricingId,Amount,CoverImageUrl from CarPricings inner join Cars on Cars.CarId=CarPricings.CarId inner join Brands on Cars.BrandId=Brands.BrandId inner join Pricings on Pricings.PricingId=CarPricings.PricingId) as Source_table\r\nPivot(\r\nSum(Amount) For PricingId in ([2],[3],[5])\r\n) as Pivot_table").ToList();
             return values;
         }
 	}
