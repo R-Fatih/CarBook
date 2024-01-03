@@ -21,8 +21,20 @@ namespace CarBook.WebUI.ViewComponents.BlogViewComponents
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<ResultGetBlogById>(jsonData);
+
+
+                var responseMessage2 = await client.GetAsync($"https://localhost:7224/api/Comments/GetCommentCountByBlog?id=" + id);
+                if (responseMessage2.IsSuccessStatusCode)
+                {
+                    var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                    var values2 = JsonConvert.DeserializeObject<int>(jsonData2);
+                    ViewBag.count = values2;
+                }
                 return View(values);
             }
+
+           
+
             return View();
         }
     }
