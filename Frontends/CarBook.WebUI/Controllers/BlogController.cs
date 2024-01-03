@@ -1,6 +1,10 @@
 ﻿using CarBook.Dtos.BlogDtos;
+using CarBook.Dtos.CommentChildrenDtos;
+using CarBook.Dtos.CommentDtos;
+using CarBook.Dtos.ContactDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace CarBook.WebUI.Controllers
 {
@@ -33,6 +37,38 @@ namespace CarBook.WebUI.Controllers
             ViewBag.v1 = "Bloglar";
             ViewBag.v2 = "Blog detayları";
             ViewBag.blogid = id;
+            return View();
+        }
+
+
+        [HttpGet]
+        public PartialViewResult AddComment(int id) { ViewBag.blogid = id; return PartialView(); }
+        [HttpPost]
+        public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createCommentDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7224/api/Comments", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Default");
+            }
+            return View();
+        }
+        [HttpGet]
+        public PartialViewResult AddChildrenComment(int id) { ViewBag.commentid = id; return PartialView(); }
+        [HttpPost]
+        public async Task<IActionResult> AddChildrenComment(CreateCommentChildrenDto createCommentChildrenDto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createCommentChildrenDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7224/api/CommentChildrens", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction($"BlogDetail", "Blog");
+            }
             return View();
         }
     }

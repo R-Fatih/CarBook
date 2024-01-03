@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Mediator\Results\CommentResults\" />
     <Folder Include="Features\Mediator\Results\ReservationResults\" />
   </ItemGroup>
 

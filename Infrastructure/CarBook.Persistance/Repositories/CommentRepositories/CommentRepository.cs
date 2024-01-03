@@ -33,6 +33,7 @@ namespace CarBook.Persistance.Repositories.CommentRepositories
                 BlogId = x.BlogId,
                 CreatedDate = x.CreatedDate,
                 Description = x.Description,    
+                Email = x.Email,
             }).ToList();
         }
 
