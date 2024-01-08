@@ -1,0 +1,42 @@
+﻿@using CarBook.Dtos.CarFeatureDtos
+@model List<ResultCarFeatureByCarIdDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<link href="~/Admin/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Araca ait özellikler listesi</h4>
+                        <p class="card-subtitle mb-4">
+                            
+                            Arabalara ait özellikleri bu kısımda görüntüleyebilirsiniz.
+                        </p>
+                        <form method="post">
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <div class="form-check">
+
+                                    <input type="hidden" asp-for=@Model[i].CarFeatureId data-toggle="switchery" data-color="#2e7ce4" />
+                                    <input type="hidden" asp-for=@Model[i].FeatureName  data-toggle="switchery" data-color="#2e7ce4" />
+                                    <input type="checkbox" asp-for=@Model[i].Available class="form-check-input"   data-toggle="switchery" data-color="#2e7ce4" />
+                                    <label class="form-check-label" for="@Model[i].Available">@Model[i].FeatureName</label>
+                                </div>
+                            }
+                            <br />
+                            <button type="submit" class="btn btn-success">Değişiklikleri kaydet</button>
+                        </form>
+
+
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div>
+
+    </div>
+</div>
