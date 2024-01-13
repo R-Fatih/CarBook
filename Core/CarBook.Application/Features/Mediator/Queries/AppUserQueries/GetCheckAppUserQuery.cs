@@ -12,5 +12,6 @@ namespace CarBook.Application.Features.Mediator.Queries.AppUserQueries
 	{
         public string UserName { get; set; }
         public string Password { get; set; }
+
     }
 }

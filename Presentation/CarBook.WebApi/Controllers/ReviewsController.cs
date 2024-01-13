@@ -38,6 +38,7 @@ namespace CarBook.WebApi.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
+				
 				return BadRequest(ModelState);
 			}
 			await _mediator.Send(command);

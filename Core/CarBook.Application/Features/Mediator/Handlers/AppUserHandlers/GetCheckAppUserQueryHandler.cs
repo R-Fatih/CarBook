@@ -2,6 +2,7 @@
 using CarBook.Application.Features.Mediator.Results.AppUserResults;
 using CarBook.Application.Interfaces;
 using CarBook.Application.Interfaces.AppUserInterfaces;
+using CarBook.Application.Tools;
 using CarBook.Domain.Entities;
 using MediatR;
 using System;
@@ -16,9 +17,11 @@ namespace CarBook.Application.Features.Mediator.Handlers.AppUserHandlers
 	{
 
 		private readonly IRepository<AppUser> _appUserRepository;
-		private readonly IRepository<AppRole> _appRoleRepository;
+		private readonly IRepository<AppRole> _appRoleRepository; 
+		private readonly int _iteration = 3;
+        private readonly string _pepper = "quaresmakonyasporlularıniçindengeçtigolüattı";
 
-		public GetCheckAppUserQueryHandler(IRepository<AppUser> appUserRepository, IRepository<AppRole> appRoleRepository)
+        public GetCheckAppUserQueryHandler(IRepository<AppUser> appUserRepository, IRepository<AppRole> appRoleRepository)
 		{
 			_appUserRepository = appUserRepository;
 			_appRoleRepository = appRoleRepository;
@@ -26,8 +29,11 @@ namespace CarBook.Application.Features.Mediator.Handlers.AppUserHandlers
 
 		public async Task<GetCheckAppUserQueryResult> Handle(GetCheckAppUserQuery request, CancellationToken cancellationToken)
 		{
+			var username =await _appUserRepository.GetByFilterAsync(x => x.UserName == request.UserName);
 			var values = new GetCheckAppUserQueryResult();
-			var user = await _appUserRepository.GetByFilterAsync(x => x.UserName == request.UserName && x.Password == request.Password);
+            var passwordHash = PasswordHasher.ComputeHash(request.Password, username.PasswordSalt, _pepper, _iteration);
+
+            var user = await _appUserRepository.GetByFilterAsync(x => x.UserName == request.UserName && x.PasswordHash == passwordHash);
 			if (user == null)
 				values.IsExist = false;
 			else
